@@ -26,6 +26,30 @@ function mainController($scope, $http) {
             });
     };
 
+    // get all fails
+    $scope.allFails = function(){
+        $http.get('/api/fails')
+            .success(function(data) {
+                $scope.fails = data;
+                console.log(data);
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
+    }
+
+    // get top 10 (best voted)
+    $scope.top10 = function(){
+        $http.get('/api/fails/top10')
+            .success(function(data) {
+                $scope.fails = data;
+                console.log(data);
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
+    }
+
     // increase votations
     $scope.voteUp = function(failid){
         $http.post('/api/voteup/' + failid)
@@ -39,5 +63,5 @@ function mainController($scope, $http) {
             });
 
 
-    }
+    };
 }

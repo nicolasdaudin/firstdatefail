@@ -42,6 +42,22 @@ app.get('/api/fails', function(req, res) {
     });
 });
 
+// get top 10 fails
+app.get('/api/fails/top10', function(req, res) {
+
+    // use mongoose to get all fails in the database
+    Fail.find({}).sort({votes: 'desc'}).limit(10).exec(function(err, fails) {
+
+        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+        if (err)
+            res.send(err)
+
+        console.log("Top 10 fails : " + JSON.stringify(fails));
+
+        res.json(fails); // return all fails in JSON format
+    });
+});
+
 // create fail and send back all fails after creation
 app.post('/api/fails', function(req, res) {
 
