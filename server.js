@@ -6,7 +6,8 @@ var morgan = require('morgan');             // log requests to the console (expr
 var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 
-var db = mongoose.connect('mongodb://ec2-54-183-136-164.us-west-1.compute.amazonaws.com:27017/firstdatefail');     // connect to mongoDB database
+//var db = mongoose.connect('mongodb://ec2-54-183-136-164.us-west-1.compute.amazonaws.com:27017/firstdatefail');     // connect to mongoDB database
+var db = mongoose.connect('mongodb://localhost:27017/firstdatefail');
 
 // configuration =================
 
@@ -21,8 +22,11 @@ app.use(methodOverride());
 // define model =================
 var Fail = mongoose.model('Fail', {
     nickname: String,
+    sex: String, //'male','female'
     text : String,
-    votes : Number
+    likes : Number,
+    dislikes : Number,
+    status: String // 'approved', 'pending', 'rejected'
 });
 
 // routes ======================================================================
@@ -42,11 +46,11 @@ app.get('/api/fails', function(req, res) {
     });
 });
 
-// get top 10 fails
+// get top 10 fails (most liked)
 app.get('/api/fails/top10', function(req, res) {
 
     // use mongoose to get all fails in the database
-    Fail.find({}).sort({votes: 'desc'}).limit(10).exec(function(err, fails) {
+    Fail.find({}).sort({likes: 'desc'}).limit(10).exec(function(err, fails) {
 
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err)
@@ -60,12 +64,15 @@ app.get('/api/fails/top10', function(req, res) {
 
 // create fail and send back all fails after creation
 app.post('/api/fails', function(req, res) {
-
+    console.log("Sexo : " + req.body.sex);
     // create a fail, information comes from AJAX request from Angular
     Fail.create({
         nickname: req.body.nickname,
+        sex: req.body.sex, // TODO: default
         text : req.body.text,
-        votes: 0
+        likes : 0,
+        dislikes : 0,
+        status: 'pending'
     }, function(err, fail) {
         if (err)
             res.send(err);
@@ -80,11 +87,11 @@ app.post('/api/fails', function(req, res) {
 
 });
 
-// vote up and send back all fails after voting up
-app.post('/api/voteup/:id', function(req,res){
 
-    Fail.findByIdAndUpdate(req.params.id,{$inc : {votes: 1}},function(err,fail){
-        console.log("Fail id : " + JSON.stringify(req.params.id));
+// like and send back all fails after liking
+app.post('/api/like/:id', function(req,res){
+    Fail.findByIdAndUpdate(req.params.id,{$inc : {likes: 1}},function(err,fail){
+        console.log("Variable increased : likes - Fail id : " + JSON.stringify(req.params.id));
         if (err){
             console.log("Error : " + err);
         }
@@ -96,11 +103,26 @@ app.post('/api/voteup/:id', function(req,res){
                 res.send(err)
             res.json(fails);
         });
-
     })
+});
 
+// dislike and send back all fails after disliking
+app.post('/api/dislike/:id', function(req,res){
+    Fail.findByIdAndUpdate(req.params.id,{$inc : {dislikes: 1}},function(err,fail){
+        console.log("Variable increased : dislikes - Fail id : " + JSON.stringify(req.params.id));
+        if (err){
+            console.log("Error : " + err);
+        }
+        console.log("Fail found : " + JSON.stringify(fail));
 
-})
+        // get and return all the fails after you create another
+        Fail.find(function(err, fails) {
+            if (err)
+                res.send(err)
+            res.json(fails);
+        });
+    })
+});
 
 // application -------------------------------------------------------------
 app.get('*', function(req, res) {

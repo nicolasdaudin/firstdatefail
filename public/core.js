@@ -50,9 +50,9 @@ function mainController($scope, $http) {
             });
     }
 
-    // increase votations
-    $scope.voteUp = function(failid){
-        $http.post('/api/voteup/' + failid)
+    // increase like
+    $scope.like = function(failid){
+        $http.post('/api/like/' + failid)
             .success(function(data) {
                 $scope.formData = {}; // clear the form so our user is ready to enter another
                 $scope.fails = data;
@@ -61,7 +61,20 @@ function mainController($scope, $http) {
             .error(function(data) {
                 console.log('Error: ' + data);
             });
-
-
     };
+
+    // increase dislike
+    $scope.dislike = function(failid){
+        $http.post('/api/dislike/' + failid)
+            .success(function(data) {
+                $scope.formData = {}; // clear the form so our user is ready to enter another
+                $scope.fails = data;
+                console.log(data);
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
+    };
+
+
 }

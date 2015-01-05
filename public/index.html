@@ -63,6 +63,14 @@
                             <label for="nickname">Tu nombre:</label>
                             <input type="text" id="nickname" class="form-control input-lg" placeholder="Tu nombre" ng-model="formData.nickname">
                         </div>
+
+                        <!-- BIND THIS VALUE TO formData.sex IN ANGULAR -->
+                        <div class="form-group form-group-sm">
+                            Eres:  
+                            <label class="radio-inline"><input type="radio" class="form-control" ng-model="formData.sex" value="female">Mujer</label>
+                            <label class="radio-inline"><input type="radio" class="form-control" ng-model="formData.sex" value="male">Hombre</label>
+                        </div>
+
                         <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
                         <div class="form-group form-group-lg">
                             <label for="text">Cuentanos lo que te pasó. No te olvides ser gracioso, intenta evitar las faltas de ortografia</label>
@@ -91,7 +99,8 @@
                         <blockquote>{{ fail.text }}</blockquote>     
                     </div>
                     <div class="col-md-4 center-block" style="vertical-align:middle">
-                        <button class="btn-primary btn-xs" type="submit" ng-click="voteUp(fail._id)">Me gusta !!!</button> - <span class="label label-info">{{ fail.votes }}</span> votos
+                        <button class="btn-success btn-md" type="submit" ng-click="like(fail._id)"><span class="glyphicon glyphicon-thumbs-up"></span> Me gusta <span class="badge">{{ fail.likes }}</span></button>
+                        <button class="btn-danger btn-md" type="submit" ng-click="dislike(fail._id)"><span class="glyphicon glyphicon-thumbs-down"></span> No me gusta <span class="badge">{{ fail.dislikes }}</span></button>
                     </div>
                 </div>
 
