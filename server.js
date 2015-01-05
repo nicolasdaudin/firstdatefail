@@ -5,9 +5,19 @@ var mongoose = require('mongoose');                     // mongoose for mongodb
 var morgan = require('morgan');             // log requests to the console (express4)
 var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
+var moment = require('moment');
+
+// connect to mongoDB database
+//var dbpath = 'ec2-54-183-136-164.us-west-1.compute.amazonaws.com:27017/firstdatefail';
+var dbpath = 'localhost:27017/firstdatefail'
+var db = mongoose.connect('mongodb://' + dbpath, function(err) {
+    if (err) {
+         console.log("Error while connecting to db ["+dbpath+"]: " + err);
+    }
+});    
 
 //var db = mongoose.connect('mongodb://ec2-54-183-136-164.us-west-1.compute.amazonaws.com:27017/firstdatefail');     // connect to mongoDB database
-var db = mongoose.connect('mongodb://localhost:27017/firstdatefail');
+
 
 // configuration =================
 
@@ -26,7 +36,8 @@ var Fail = mongoose.model('Fail', {
     text : String,
     likes : Number,
     dislikes : Number,
-    status: String // 'approved', 'pending', 'rejected'
+    status: String, // 'approved', 'pending', 'rejected'
+    added: Date
 });
 
 // routes ======================================================================
@@ -66,13 +77,17 @@ app.get('/api/fails/top10', function(req, res) {
 app.post('/api/fails', function(req, res) {
     console.log("Sexo : " + req.body.sex);
     // create a fail, information comes from AJAX request from Angular
+
+    var now = moment().format('YYYY-MM-DD HH:mm:ss');
+
     Fail.create({
         nickname: req.body.nickname,
         sex: req.body.sex, // TODO: default
         text : req.body.text,
         likes : 0,
         dislikes : 0,
-        status: 'pending'
+        status: 'pending',
+        added: now
     }, function(err, fail) {
         if (err)
             res.send(err);

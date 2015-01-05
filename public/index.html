@@ -32,7 +32,7 @@
 
     <!-- SPELLS -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script><!-- load angular -->
     <script src="core.js"></script>
 
 </head>
@@ -67,8 +67,8 @@
                         <!-- BIND THIS VALUE TO formData.sex IN ANGULAR -->
                         <div class="form-group form-group-sm">
                             Eres:  
-                            <label class="radio-inline"><input type="radio" class="form-control" ng-model="formData.sex" value="female">Mujer</label>
-                            <label class="radio-inline"><input type="radio" class="form-control" ng-model="formData.sex" value="male">Hombre</label>
+                            <label class="radio-inline"><input type="radio" ng-model="formData.sex" value="female">Mujer</label>
+                            <label class="radio-inline"><input type="radio" ng-model="formData.sex" value="male">Hombre</label>
                         </div>
 
                         <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
@@ -95,13 +95,17 @@
                 <!-- LOOP OVER THE FAILS IN $scope.fails -->
                 <div class="onefail row" ng-class-odd="'onefail-odd'" ng-class-even="'onefail-even'" ng-repeat="fail in fails">
                     <div class="col-md-8">
-                        <strong>{{ fail.nickname}}</strong> ha tenido este fail en alguna primera cita:
+                        <strong>{{ fail.nickname}}</strong> (es <i>{{ fail.sex === "male" ? "un hombre":"una mujer" }}</i>) ha tenido este fail en alguna primera cita:
                         <blockquote>{{ fail.text }}</blockquote>     
                     </div>
                     <div class="col-md-4 center-block" style="vertical-align:middle">
                         <button class="btn-success btn-md" type="submit" ng-click="like(fail._id)"><span class="glyphicon glyphicon-thumbs-up"></span> Me gusta <span class="badge">{{ fail.likes }}</span></button>
                         <button class="btn-danger btn-md" type="submit" ng-click="dislike(fail._id)"><span class="glyphicon glyphicon-thumbs-down"></span> No me gusta <span class="badge">{{ fail.dislikes }}</span></button>
                     </div>
+                    <div class="col-md-8">
+                        Este fail occurrió el {{ fail.added | date : "dd/MM/yyyy 'a las' H:mm"}}
+                    </div>
+
                 </div>
 
             </div>
