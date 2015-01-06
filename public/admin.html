@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
 
-    <title>Los fails de las primeras citas</title>
+    <title>ADMIN</title>
 
     <!-- SCROLLS -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
@@ -33,7 +33,7 @@
     <!-- SPELLS -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script><!-- load angular -->
-    <script src="core.js"></script>
+    <script src="admin.js"></script>
 
 </head>
 <!-- SET THE CONTROLLER AND GET ALL FAILS -->
@@ -42,8 +42,8 @@
 
         <!-- HEADER AND FAILS COUNT -->
         <div class="jumbotron text-center">
-            <h1>Los fails de las primeras citas</h1>
-            <h3>De momento, hay <span class="label label-info">{{ fails.length }}</span> fails.</h3>
+            <h1>Moderar las anecdotas recibidas</h1>
+            <h3>Aún te quedan <span class="label label-info">{{ fails.length }}</span> anecdotas para moderar.</h3>
             <h3><span style="color:green">Añade el tuyo ;-)</span></h3>
         </div>
 
@@ -90,7 +90,6 @@
                 <div style="text-align:center; padding-bottom:15px">
                     <button class="btn-primary btn-lg" type="submit" ng-click="allFails()">TODOS LOS FAILS</button>&nbsp;
                     <button class="btn-primary btn-lg" type="submit" ng-click="top10()">LOS MAS VOTADOS</button>
-                    <a href="/admin">ADMIN</a>
                 </div>
                         
                 <!-- LOOP OVER THE FAILS IN $scope.fails -->

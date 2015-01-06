@@ -3,8 +3,8 @@ var firstdatefail = angular.module('firstdatefail', []);
 function mainController($scope, $http) {
     $scope.formData = {};
 
-    // when landing on the page, get all fails and show them
-    $http.get('/api/fails/approved')
+    // when landing on the page, get all PENDING fails and show them
+    $http.get('/api/fails/pending')
         .success(function(data) {
             $scope.fails = data;
             console.log(data);

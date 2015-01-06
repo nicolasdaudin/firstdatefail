@@ -44,10 +44,10 @@ var Fail = mongoose.model('Fail', {
 
 // api ---------------------------------------------------------------------
 // get all fails
-app.get('/api/fails', function(req, res) {
+app.get('/api/fails/:status', function(req, res) {
 
     // use mongoose to get all fails in the database
-    Fail.find(function(err, fails) {
+    Fail.find({status:req.params.status},function(err, fails) {
 
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err)
@@ -61,7 +61,7 @@ app.get('/api/fails', function(req, res) {
 app.get('/api/fails/top10', function(req, res) {
 
     // use mongoose to get all fails in the database
-    Fail.find({}).sort({likes: 'desc'}).limit(10).exec(function(err, fails) {
+    Fail.find().sort({likes: 'desc'}).limit(10).exec(function(err, fails) {
 
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err)
@@ -140,9 +140,15 @@ app.post('/api/dislike/:id', function(req,res){
 });
 
 // application -------------------------------------------------------------
-app.get('*', function(req, res) {
+
+app.get('/admin', function(req,res){
+    res.sendfile('./public/admin.html'); // 
+});
+
+app.get('/', function(req, res) {
     res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
 });
+
 
 
 // listen (start app with node server.js) ======================================
