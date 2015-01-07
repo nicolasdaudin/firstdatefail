@@ -92,11 +92,15 @@ app.post('/api/fails', function(req, res) {
         if (err)
             res.send(err);
 
-        // get and return all the fails after you create another
-        Fail.find(function(err, fails) {
+        // get and return all the accepted fails after you create another
+        
+        Fail.find({status:'approved'},function(err, fails) {
+
+            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
             if (err)
                 res.send(err)
-            res.json(fails);
+
+            res.json(fails); // return all fails in JSON format
         });
     });
 
@@ -138,6 +142,49 @@ app.post('/api/dislike/:id', function(req,res){
         });
     })
 });
+
+// approve  a fail and send back all pending fails
+app.post('/api/approve/:id', function(req,res){
+    Fail.findByIdAndUpdate(req.params.id,{$set : {status: 'approved'}},function(err,fail){
+        console.log("This fail has been approved - Fail id : " + JSON.stringify(req.params.id));
+        if (err){
+            console.log("Error : " + err);
+        }
+        console.log("Fail found : " + JSON.stringify(fail));
+
+        // use mongoose to get all pending fails in the database
+        Fail.find({status:'pending'},function(err, fails) {
+
+            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+            if (err)
+                res.send(err)
+
+            res.json(fails); // return all fails in JSON format
+        });
+    })
+});
+
+ // reject  a fail and send back all pending fails
+app.post('/api/reject/:id', function(req,res){
+    Fail.findByIdAndUpdate(req.params.id,{$set : {status: 'rejected'}},function(err,fail){
+        console.log("This fail has been rejected - Fail id : " + JSON.stringify(req.params.id));
+        if (err){
+            console.log("Error : " + err);
+        }
+        console.log("Fail found : " + JSON.stringify(fail));
+
+        // use mongoose to get all pending fails in the database
+        Fail.find({status:'pending'},function(err, fails) {
+
+            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+            if (err)
+                res.send(err)
+
+            res.json(fails); // return all fails in JSON format
+        });
+    })
+});
+
 
 // application -------------------------------------------------------------
 
