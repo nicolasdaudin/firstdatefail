@@ -58,10 +58,10 @@ app.get('/api/fails/:status', function(req, res) {
 });
 
 // get top 10 fails (most liked)
-app.get('/api/fails/top10', function(req, res) {
-
+app.get('/api/fails/top/10', function(req, res) {
+    console.log("Retreving top 10");
     // use mongoose to get all fails in the database
-    Fail.find().sort({likes: 'desc'}).limit(10).exec(function(err, fails) {
+    Fail.find({status:'approved'}).sort({likes: 'desc'}).limit(10).exec(function(err, fails) {
 
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err)
@@ -116,8 +116,8 @@ app.post('/api/like/:id', function(req,res){
         }
         console.log("Fail found : " + JSON.stringify(fail));
 
-        // get and return all the fails after you create another
-        Fail.find(function(err, fails) {
+        // get and return all the fails 
+        Fail.find({status:'approved'},function(err, fails) {
             if (err)
                 res.send(err)
             res.json(fails);
@@ -134,8 +134,8 @@ app.post('/api/dislike/:id', function(req,res){
         }
         console.log("Fail found : " + JSON.stringify(fail));
 
-        // get and return all the fails after you create another
-        Fail.find(function(err, fails) {
+        // get and return all the fails 
+        Fail.find({status:'approved'},function(err, fails) {
             if (err)
                 res.send(err)
             res.json(fails);

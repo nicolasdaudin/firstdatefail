@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"get",
+				"getAll"
+			],
+			[
+				"g",
+				"getAllByStatus"
+			],
+			[
 				"two",
 				"two_days_ago"
 			],
@@ -87,23 +95,7 @@
 			"file": "server.js",
 			"settings":
 			{
-				"buffer_size": 5423,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/smd/dev/scotchtodo/server.js",
-			"settings":
-			{
-				"buffer_size": 2116,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/smd/dev/scotchtodo/models.js",
-			"settings":
-			{
-				"buffer_size": 1135,
+				"buffer_size": 7233,
 				"line_ending": "Windows"
 			}
 		},
@@ -119,15 +111,7 @@
 			"file": "public/index.html",
 			"settings":
 			{
-				"buffer_size": 5425,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/admin.js",
-			"settings":
-			{
-				"buffer_size": 2418,
+				"buffer_size": 5413,
 				"line_ending": "Windows"
 			}
 		},
@@ -135,15 +119,15 @@
 			"file": "public/admin.html",
 			"settings":
 			{
-				"buffer_size": 5368,
+				"buffer_size": 2890,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/core.js",
+			"file": "public/js/app.js",
 			"settings":
 			{
-				"buffer_size": 2411,
+				"buffer_size": 5307,
 				"line_ending": "Windows"
 			}
 		}
@@ -200,6 +184,10 @@
 	},
 	"file_history":
 	[
+		"/C/smd/dev/firstdatefail/public/admin.js",
+		"/C/smd/dev/firstdatefail/public/js/controller.js",
+		"/C/smd/dev/scotchtodo/models.js",
+		"/C/smd/dev/scotchtodo/server.js",
 		"/Users/nicolasdaudin/dev/scotchtodo/package.json",
 		"/C/smd/dev/firstdatefail/package.json",
 		"/Users/nicolasdaudin/dev/scotchtodo/smd_modules/google.js",
@@ -273,7 +261,7 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -281,15 +269,15 @@
 					"file": "server.js",
 					"settings":
 					{
-						"buffer_size": 5423,
+						"buffer_size": 7233,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3948,
+								3948
 							]
 						],
 						"settings":
@@ -299,66 +287,13 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 42.0,
+						"translation.y": 756.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/C/smd/dev/scotchtodo/server.js",
-					"settings":
-					{
-						"buffer_size": 2116,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								491,
-								460
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/C/smd/dev/scotchtodo/models.js",
-					"settings":
-					{
-						"buffer_size": 1135,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								60,
-								200
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 42.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "package.json",
 					"settings":
 					{
@@ -386,52 +321,24 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 2,
 					"file": "public/index.html",
 					"settings":
 					{
-						"buffer_size": 5425,
+						"buffer_size": 5413,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								592,
+								592
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 126.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "public/admin.js",
-					"settings":
-					{
-						"buffer_size": 2418,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
@@ -442,19 +349,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 3,
 					"file": "public/admin.html",
 					"settings":
 					{
-						"buffer_size": 5368,
+						"buffer_size": 2890,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								716,
-								716
+								1349,
+								1349
 							]
 						],
 						"settings":
@@ -470,19 +377,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "public/core.js",
+					"buffer": 4,
+					"file": "public/js/app.js",
 					"settings":
 					{
-						"buffer_size": 2411,
+						"buffer_size": 5307,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								4996,
+								4996
 							]
 						],
 						"settings":
