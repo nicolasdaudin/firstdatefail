@@ -1,0 +1,75 @@
+    <div class="container">
+
+        <!-- HEADER AND FAILS COUNT -->
+        <div class="jumbotron text-center">
+            <h1>Los fails de las primeras citas - PARTIALS</h1>
+            <h3>De momento, hay <span class="label label-info">{{ fails.length }}</span> fails.</h3>
+            <h3><span style="color:green">Añade el tuyo ;-)</span></h3>
+        </div>
+
+        
+        <div class="row">
+        
+
+            <!-- FORM TO CREATE FAILS -->
+            <div id="fail-form" class="col-md-4">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <legend>Tan mal la pasaste? Cuentanos!</legend>
+                        
+
+                        <!-- BIND THIS VALUE TO formData.nickname IN ANGULAR -->
+                        <div class="form-group form-group-sm">
+                            <label for="nickname">Tu nombre:</label>
+                            <input type="text" id="nickname" class="form-control input-lg" placeholder="Tu nombre" ng-model="formData.nickname">
+                        </div>
+
+                        <!-- BIND THIS VALUE TO formData.sex IN ANGULAR -->
+                        <div class="form-group form-group-sm">
+                            Eres:  
+                            <label class="radio-inline"><input type="radio" ng-model="formData.sex" value="female">Mujer</label>
+                            <label class="radio-inline"><input type="radio" ng-model="formData.sex" value="male">Hombre</label>
+                        </div>
+
+                        <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+                        <div class="form-group form-group-lg">
+                            <label for="text">Cuentanos lo que te pasó. No te olvides ser gracioso, intenta evitar las faltas de ortografia</label>
+                            <textarea id="text" class="form-control input-lg" placeholder="Cuentanos!!!" ng-model="formData.text" rows="4" cols="80"></textarea>
+                        </div>                        
+                         
+
+                        <!-- createFail() WILL CREATE NEW FAILS -->
+                        <button type="submit" class="btn btn-primary btn-lg" ng-click="createFail()">Enviar</button>
+                    </fieldset>
+                </form>
+            </div>
+
+            <!-- FAILS LIST -->
+            <div id="fails-list" class="col-md-7 col-md-offset-1">
+
+                <div style="text-align:center; padding-bottom:15px">
+                    <button class="btn-primary btn-lg" type="submit" ng-click="allFails()">TODOS LOS FAILS</button>&nbsp;
+                    <button class="btn-primary btn-lg" type="submit" ng-click="top10()">LOS MAS VOTADOS</button>
+                    <a href="#/admin">ADMIN</a>
+                </div>
+                        
+                <!-- LOOP OVER THE FAILS IN $scope.fails -->
+                <div class="onefail row" ng-class-odd="'onefail-odd'" ng-class-even="'onefail-even'" ng-repeat="fail in fails">
+                    <div class="col-md-8">
+                        <strong>{{ fail.nickname}}</strong> (es <i>{{ fail.sex === "male" ? "un hombre":"una mujer" }}</i>) ha tenido este fail en alguna primera cita:
+                        <blockquote>{{ fail.text }}</blockquote>     
+                    </div>
+                    <div class="col-md-4 center-block" style="vertical-align:middle">
+                        <button class="btn-success btn-md" type="submit" ng-click="like(fail._id)"><span class="glyphicon glyphicon-thumbs-up"></span> Me gusta <span class="badge">{{ fail.likes }}</span></button>
+                        <button class="btn-danger btn-md" type="submit" ng-click="dislike(fail._id)"><span class="glyphicon glyphicon-thumbs-down"></span> No me gusta <span class="badge">{{ fail.dislikes }}</span></button>
+                    </div>
+                    <div class="col-md-8">
+                        Nos lo contó el {{ fail.added | date : "dd/MM/yyyy 'a las' H:mm"}}
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>

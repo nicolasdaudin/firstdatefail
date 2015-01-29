@@ -188,13 +188,16 @@ app.post('/api/reject/:id', function(req,res){
 
 // application -------------------------------------------------------------
 
-app.get('/admin', function(req,res){
-    res.sendfile('./public/admin.html'); // 
+/*app.get('/*', function(req,res){
+    //res.sendfile('./public/index.html'); // 
+    console.log("get *");
+    res.location('/admin');
 });
 
 app.get('/', function(req, res) {
-    res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
-});
+    //res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+    res.location('/');
+});*/
 
 
 

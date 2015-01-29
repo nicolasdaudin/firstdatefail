@@ -1,4 +1,23 @@
-var firstdatefail = angular.module('firstdatefail', []);
+var firstdatefail = angular.module('firstdatefail', ['ngRoute']);
+
+/**********************
+*       CONFIG        *
+**********************/
+
+firstdatefail.config(['$routeProvider', function($routeProvider) {
+    $routeProvider.
+        when('/', {
+            templateUrl: 'partials/fails-list.html',
+            controller: 'mainController' 
+        }).
+        when('/admin', {
+            templateUrl : 'partials/admin.html',
+            controller: 'adminController'
+        }).
+        otherwise({
+            redirectTo : '/'
+        });
+}]);
 
 /**********************
 *    CONTROLLERS      *
@@ -101,7 +120,6 @@ firstdatefail.controller('adminController',['$scope','moderationService','failSe
             .error(function(data) {
                 console.log('Error: ' + data);
             });
-
 
         // approve a story
         $scope.approve = function(failid){

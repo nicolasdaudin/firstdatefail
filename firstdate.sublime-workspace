@@ -95,7 +95,7 @@
 			"file": "server.js",
 			"settings":
 			{
-				"buffer_size": 7233,
+				"buffer_size": 7314,
 				"line_ending": "Windows"
 			}
 		},
@@ -111,15 +111,23 @@
 			"file": "public/index.html",
 			"settings":
 			{
-				"buffer_size": 5413,
+				"buffer_size": 2459,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/admin.html",
+			"file": "public/partials/fails-list.html",
 			"settings":
 			{
-				"buffer_size": 2890,
+				"buffer_size": 4102,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/partials/admin.html",
+			"settings":
+			{
+				"buffer_size": 1604,
 				"line_ending": "Windows"
 			}
 		},
@@ -127,7 +135,7 @@
 			"file": "public/js/app.js",
 			"settings":
 			{
-				"buffer_size": 5307,
+				"buffer_size": 5797,
 				"line_ending": "Windows"
 			}
 		}
@@ -269,15 +277,15 @@
 					"file": "server.js",
 					"settings":
 					{
-						"buffer_size": 7233,
+						"buffer_size": 7314,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3948,
-								3948
+								2447,
+								2447
 							]
 						],
 						"settings":
@@ -287,7 +295,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 756.0,
+						"translation.y": 420.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -304,8 +312,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								251,
+								251
 							]
 						],
 						"settings":
@@ -325,15 +333,15 @@
 					"file": "public/index.html",
 					"settings":
 					{
-						"buffer_size": 5413,
+						"buffer_size": 2459,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								592,
-								592
+								2105,
+								2105
 							]
 						],
 						"settings":
@@ -343,25 +351,53 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 477.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "public/admin.html",
+					"file": "public/partials/fails-list.html",
 					"settings":
 					{
-						"buffer_size": 2890,
+						"buffer_size": 4102,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1349,
-								1349
+								2759,
+								2759
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 294.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "public/partials/admin.html",
+					"settings":
+					{
+						"buffer_size": 1604,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								782,
+								782
 							]
 						],
 						"settings":
@@ -377,19 +413,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "public/js/app.js",
 					"settings":
 					{
-						"buffer_size": 5307,
+						"buffer_size": 5797,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4996,
-								4996
+								427,
+								427
 							]
 						],
 						"settings":

@@ -1,0 +1,38 @@
+    <div class="container">
+
+        <!-- HEADER AND FAILS COUNT -->
+        <div class="jumbotron text-center">
+            <h1>Moderar las anecdotas recibidas - PARTIALS</h1>
+            <h3>Aún te quedan <span class="label label-info">{{ fails.length }}</span> anecdotas para moderar.</h3>
+            <h3><span style="color:green">Añade el tuyo ;-)</span></h3>
+        </div>
+
+        
+        <div class="row">
+        
+
+            <!-- FORM TO CREATE FAILS -->
+            <div id="fail-form" class="col-md-4">
+                En la derecha podrás moderar las anecdotas
+            </div>
+
+            <!-- FAILS LIST -->
+            <div id="fails-list" class="col-md-7 col-md-offset-1">
+
+                        
+                <!-- LOOP OVER THE FAILS IN $scope.fails -->
+                <div class="onefail row" ng-class-odd="'onefail-odd'" ng-class-even="'onefail-even'" ng-repeat="fail in fails">
+                    <div class="col-md-8">                        
+                        <blockquote>{{ fail.text }}</blockquote>     
+                    </div>
+                    <div class="col-md-4 center-block" style="vertical-align:middle">
+                        <button class="btn-success btn-md" type="submit" ng-click="approve(fail._id)"><span class="glyphicon glyphicon-thumbs-up"></span> Aceptar </button>
+                        <button class="btn-danger btn-md" type="submit" ng-click="reject(fail._id)"><span class="glyphicon glyphicon-thumbs-down"></span> Rechazar </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
