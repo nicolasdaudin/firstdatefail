@@ -8,16 +8,39 @@ firstdatefail.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
         when('/', {
             templateUrl: 'partials/fails-list.html',
-            controller: 'mainController' 
+            controller: 'mainController',
+            access : { requiredLogin : false }
         }).
         when('/admin', {
             templateUrl : 'partials/admin.html',
-            controller: 'adminController'
+            controller: 'adminController',
+            access : { requiredLogin : true }
+        }).
+        when('/login', {
+            templateUrl : 'partials/login.html',
+            controller: 'loginController',
+            access : { requiredLogin : false }
         }).
         otherwise({
             redirectTo : '/'
         });
 }]);
+
+firstdatefail.config(['$httpProvider', function($httpProvider){
+    $httpProvider.interceptors.push('tokenInterceptor');
+}]);
+
+app.run(['$rootScope','$location','authenticationService', 
+    function ($rootScope,$location,authenticationService){
+        $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute){
+            if (nextRoute.access.requiredLogin && !authenticationService.isLogged){
+                $location.path("/login");
+            }
+        });
+    }
+]);
+
+
 
 /**********************
 *    CONTROLLERS      *
@@ -148,7 +171,33 @@ firstdatefail.controller('adminController',['$scope','moderationService','failSe
         };
 
     }
-])
+]);
+
+firstdatefail.controller('loginController',['$scope','$location','$window','userService','authenticationService',
+    function loginController($scope,$location,$window,userService,authenticationService){
+        $scope.logIn = function logIn(username,password){
+            if (username !== undefined && password !== undefined){
+                userService.logIn(username, password).success(function(data){
+                    authenticationService.isLogged = true;
+                    $window.sessionStorage.token = data.token;
+                    $location.path("/admin");
+                }).error(function(status,data){
+                    console.log(status);
+                    console.log(data);
+                });
+            }
+
+        }
+
+        $scope.logout = function logout(){
+            if (authenticationService.isLogged){
+                authenticationService.isLogged = false;
+                delete $window.sessionStorage.token;
+                $location.path("/");
+            }
+        }
+    }
+]);
 
 /*******************
 *    SERVICES      *
@@ -195,3 +244,59 @@ firstdatefail.factory('moderationService', ['$http', function($http){
     } 
 
 }]);
+
+firstdatefail.factory('authenticationService', function(){
+    var auth = {
+        isLogged:false
+    }
+    return auth;
+});
+
+firstdatefail.factory('userService', ['$http', function($http){
+    return {
+        logIn : function (username, password){
+            return $http.post('/api/login',{username:username,password:password});
+        },
+        logOut : function (){
+            // nothing at the moment!?
+        }
+    }
+}]);
+
+firstdatefail.factory('tokenInterceptor', ['$q','$window','$location','authenticationService', 
+    function ($q,$window,$location,authenticationService){
+        return {
+            request: function(config){
+                config.headers = config.headers || {};
+                if ($window.sessionStorage.token){
+                    config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+                }
+                return config;
+            }
+
+            requestError: function (rejection){
+                return $q.reject(rejection);
+            }
+
+            /* Set Authentication.isAuthenticated to true if 200 received */
+            response : function(response){
+                if (response != null && response.status == 200 && $window.sessionStorage.token && !AuthenticationService.isLogged) {
+                    authenticationService.isLogged = true;
+            }
+            return response || $q.when(response);
+
+            /* Revoke client authentication if 401 Unauthorized is received */
+            responseError : function(rejection){
+                if (rejection != null && rejection.status === 401 && ($window.sessionStorage.token || AuthenticationService.isLogged)) {
+                    delete $window.sessionStorage.token;
+                    AuthenticationService.isLogged = false;
+                    $location.path("/login");
+                }
+
+                return $q.reject(rejection);
+            }
+
+
+        }
+    }
+]);
