@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
     <style>
         html                    { overflow-y:scroll; }
-        body                    { padding-top:50px; }
+        body                    { padding-top:70px; }
         #fails-list              { margin-bottom:30px; }
         .onefail {
             border-radius: 25px;
@@ -41,13 +41,13 @@
 
 </head>
 <!-- SET THE CONTROLLER AND GET ALL FAILS -->
-<body>     
+<body ng-controller="rootController">     
 
-    <nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
         <div class="container-fluid">
 
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="#/">
                    
                     <span style="font-size:1.15em">CHASC</span><span class="glyphicon glyphicon glyphicon-heart-empty"></span>&nbsp;&nbsp;<span style="font-size:1.15em"> FLECHAZ</span><span class="glyphicon glyphicon glyphicon-heart"></span><span style="font-size:1.15em"> ?!</span>
                     
@@ -55,9 +55,13 @@
             </div>
 
             <ul class="nav navbar-nav">
-                <li><a href="#/">Home</a></li>
-                <li><a href="#/login">Login</a></li>
-                <li><a href="#/admin">Admin</a></li>
+                <li><a href="#/">Home</a></li>                                
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">          
+                <li><a href="#/admin">Admin</a></li> <span style="color:red">{{ isLogged }}</span>
+                <li ng-if="isLogged"><a ng-click="logout()">Logout</a></li>               
+                <li ng-if="!isLogged"><a href="#/login">Login</a></li>               
             </ul>
           
         </div>

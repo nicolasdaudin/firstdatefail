@@ -6,6 +6,9 @@ var morgan = require('morgan');             // log requests to the console (expr
 var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 var moment = require('moment');
+var jwt = require('express-jwt');
+var jsonwebtoken = require('jsonwebtoken');
+var secret = require('./config/secret');
 
 // connect to mongoDB database
 //var dbpath = 'ec2-54-183-136-164.us-west-1.compute.amazonaws.com:27017/firstdatefail';
@@ -40,9 +43,73 @@ var Fail = mongoose.model('Fail', {
     added: Date
 });
 
+
+var Schema = mongoose.Schema;
+
+var UserSchema = new Schema({
+    username : String,
+    password : String
+});
+
+UserSchema.methods.comparePassword = function(password,callback){
+    if (password == this.password){
+        callback(true);
+    } else {
+        callback(false);
+    }
+    /*bcrypt.compare(password, this.password, function(err,isMatch){
+        if (err) {
+            return callback(err);
+        }
+        callback(isMatch());
+    });*/
+};
+
+var User = mongoose.model('User',UserSchema);
+
 // routes ======================================================================
 
 // api ---------------------------------------------------------------------
+
+// login
+app.post('/api/login' , function (req, res) {
+
+    var username = req.body.username || '';
+    var password = req.body.password || '';
+
+    console.log("Trying to login username " + username + " with password " + password);
+    if (username == '' || password == ''){
+        return res.send(401);
+    }
+
+    User.findOne({username:username}, function(err, user){
+        if (err){
+            console.log("Error is " + err);
+            return res.send(401);
+        }
+
+        if (!user){
+            console.log("User not found");
+            return res.send(401);
+        }
+
+        console.log("User found " + user);
+
+        user.comparePassword(password, function (isMatch){
+            if (!isMatch) {
+                console.log("Attempt failed to login with " + user.username);
+                return res.send(401);
+            } else {
+                console.log("Logged user");
+            }
+
+            var token = jsonwebtoken.sign(user, secret.secretToken, { expiresInMinutes : 60});
+
+            return res.json({token:token});
+        });
+    });
+});
+
 // get all fails
 app.get('/api/fails/:status', function(req, res) {
 
@@ -72,6 +139,8 @@ app.get('/api/fails/top/10', function(req, res) {
         res.json(fails); // return all fails in JSON format
     });
 });
+
+
 
 // create fail and send back all fails after creation
 app.post('/api/fails', function(req, res) {
@@ -144,7 +213,7 @@ app.post('/api/dislike/:id', function(req,res){
 });
 
 // approve  a fail and send back all pending fails
-app.post('/api/approve/:id', function(req,res){
+app.post('/api/approve/:id', jwt({secret: secret.secretToken}), function(req,res){
     Fail.findByIdAndUpdate(req.params.id,{$set : {status: 'approved'}},function(err,fail){
         console.log("This fail has been approved - Fail id : " + JSON.stringify(req.params.id));
         if (err){
@@ -165,7 +234,7 @@ app.post('/api/approve/:id', function(req,res){
 });
 
  // reject  a fail and send back all pending fails
-app.post('/api/reject/:id', function(req,res){
+app.post('/api/reject/:id', jwt({secret: secret.secretToken}),function(req,res){
     Fail.findByIdAndUpdate(req.params.id,{$set : {status: 'rejected'}},function(err,fail){
         console.log("This fail has been rejected - Fail id : " + JSON.stringify(req.params.id));
         if (err){

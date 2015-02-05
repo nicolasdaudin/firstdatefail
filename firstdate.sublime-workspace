@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"auth",
+				"authenticationService"
+			],
+			[
+				"au",
+				"authenticationService"
+			],
+			[
 				"get",
 				"getAll"
 			],
@@ -111,7 +119,7 @@
 			"file": "public/index.html",
 			"settings":
 			{
-				"buffer_size": 2459,
+				"buffer_size": 2512,
 				"line_ending": "Windows"
 			}
 		},
@@ -124,10 +132,10 @@
 			}
 		},
 		{
-			"file": "public/partials/admin.html",
+			"file": "public/partials/login.html",
 			"settings":
 			{
-				"buffer_size": 1604,
+				"buffer_size": 1168,
 				"line_ending": "Windows"
 			}
 		},
@@ -135,7 +143,7 @@
 			"file": "public/js/app.js",
 			"settings":
 			{
-				"buffer_size": 5797,
+				"buffer_size": 9511,
 				"line_ending": "Windows"
 			}
 		}
@@ -269,7 +277,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -295,7 +303,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 420.0,
+						"translation.y": 2142.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -333,15 +341,15 @@
 					"file": "public/index.html",
 					"settings":
 					{
-						"buffer_size": 2459,
+						"buffer_size": 2512,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2105,
-								2105
+								1556,
+								1556
 							]
 						],
 						"settings":
@@ -351,7 +359,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 477.0,
+						"translation.y": 463.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -379,25 +387,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 294.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "public/partials/admin.html",
+					"file": "public/partials/login.html",
 					"settings":
 					{
-						"buffer_size": 1604,
+						"buffer_size": 1168,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								782,
-								782
+								1168,
+								1168
 							]
 						],
 						"settings":
@@ -417,15 +425,15 @@
 					"file": "public/js/app.js",
 					"settings":
 					{
-						"buffer_size": 5797,
+						"buffer_size": 9511,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								427,
-								427
+								1757,
+								1757
 							]
 						],
 						"settings":
@@ -435,7 +443,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 378.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
